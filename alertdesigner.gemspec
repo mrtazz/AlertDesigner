@@ -1,8 +1,8 @@
 $:.push File.expand_path('../lib', __FILE__)
-require 'AlertDesigner'
+require 'alertdesigner'
 
 Gem::Specification.new do |gem|
-  gem.name          = 'AlertDesigner'
+  gem.name          = 'alertdesigner'
   gem.version       = `git describe --tags --always --dirty`
   gem.authors       = ["Daniel Schauenberg"]
   gem.email         = 'd@unwiredcouch.com'
