@@ -1,5 +1,13 @@
 language: ruby
 rvm:
-  - 2.3.0
+- 2.3.0
 script: rake ci
 bundler_args: --with development
+deploy:
+  provider: rubygems
+  api_key:
+    secure: ld+MEQvKynXgjIG3mTufIDHKLmPUUNvVk1sQAL4saHD+h4d6uindQXs9d3842Ng9EKAfbhgdyBJuKTFTbQ+M3C5Zqlv/L+IHH8lkk6LbjPD7DAbXK/o/Ny2tOsVr579eE0t/n8zfGEl+EzVF2u8wAQkOOMtDULbOsqUtobxMscif4gVOJFDO4GQhI6hbCizZDfze4GlVSYIGMorFNe7tNdHwyFf1otKr632iFgLkTmrighKifjwTCVUf72Kge6J/iO8/wrX9RTvrBR1LU37SYVjKvp+NF4FE3YCHJKtd/43LPtQVoDkMk92iihd6cUkseMxdO8VoZZvL545yYnekLcXlVSlrqcdv4aDGclQUaZGVRkgjj4tT48rQnY44Q3Fjy/hhbdSCU6Y6Y6Dh+Vw+gJS10EzOCqVUrwX6b7Z/mPUyBqvFdA9phjVIN32ZdO88sotl+1fu3l4RhB3xb9+WsomjBTXUY31HQZf1siE1TX9w5WlYRYMlebd44ogbkwOCKVKWtobh0ci/k4LtXLz1sPjWzcOyXQcViatp7mJsJAh5ZeIgsfEcqTDPOQ+PmMQ3bF7uOnjgOKx23x3avLr1Np+cSkt9subLkUDJqaTdnMQi/Xm7H+szkvmNn7IGGnpcpjEoNg6JIsQbaYfU8XfIQv7y1uXC/ZjP82mSwlqDL6k=
+  gem: alertdesigner
+  on:
+    tags: true
+    repo: mrtazz/AlertDesigner
