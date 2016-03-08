@@ -3,7 +3,7 @@ require 'alertdesigner'
 
 Gem::Specification.new do |gem|
   gem.name          = 'alertdesigner'
-  gem.version       = `git describe --tags --always --dirty`
+  gem.version       = `git describe --tags --abbrev=0`
   gem.authors       = ["Daniel Schauenberg"]
   gem.email         = 'd@unwiredcouch.com'
   gem.homepage      = 'https://github.com/mrtazz/AlertDesigner'
