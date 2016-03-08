@@ -1,4 +1,4 @@
-require 'AlertDesigner/formatters'
+require 'alertdesigner/formatters'
 
 require 'erb'
 require 'ostruct'
