@@ -2,3 +2,4 @@ language: ruby
 rvm:
   - 2.3.0
 script: rake ci
+bundler_args: --with development
