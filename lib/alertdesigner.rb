@@ -3,7 +3,7 @@ require 'alertdesigner/check'
 
 module AlertDesigner
 
- 	@checks = []
+  @checks = []
   @formatters = []
 
   def self.checks
@@ -18,17 +18,17 @@ module AlertDesigner
     instance_eval(&block)
   end
 
-	def self.check(description, &block)
-		check = Check.new(description)
-		check.instance_eval(&block)
+  def self.check(description, &block)
+    check = Check.new(description)
+    check.instance_eval(&block)
     @checks << check
-	end
+  end
 
-	def self.formatter(formatter_class, &block)
-		formatter = formatter_class.new
-		formatter.instance_eval(&block)
+  def self.formatter(formatter_class, &block)
+    formatter = formatter_class.new
+    formatter.instance_eval(&block)
     @formatters << formatter
-	end
+  end
 
   def self.format
     ret = ""
