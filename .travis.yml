@@ -1,4 +1,7 @@
 language: ruby
+env:
+  global:
+    - COVERAGE=true
 rvm:
 - 2.3.0
 script: rake ci
