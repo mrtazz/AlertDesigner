@@ -3,6 +3,7 @@
 [![Build Status](https://travis-ci.org/mrtazz/AlertDesigner.svg?branch=master)](https://travis-ci.org/mrtazz/AlertDesigner)
 [![Coverage Status](https://coveralls.io/repos/mrtazz/AlertDesigner/badge.svg?branch=master&service=github)](https://coveralls.io/github/mrtazz/AlertDesigner?branch=master)
 [![Code Climate](https://codeclimate.com/github/mrtazz/AlertDesigner/badges/gpa.svg)](https://codeclimate.com/github/mrtazz/AlertDesigner)
+[![gem version](https://img.shields.io/gem/v/alertdesigner.svg)](https://rubygems.org/gems/alertdesigner)
 [![MIT license](https://img.shields.io/badge/license-MIT-blue.svg)](http://opensource.org/licenses/MIT)
 
 ## Overview
@@ -50,6 +51,19 @@ AlertDesigner.define do
 end
 
 puts AlertDesigner.format
+```
+
+## Installation
+Install from rubygems:
+
+```bash
+gem install alertdesigner
+```
+
+Or in your Gemfile:
+
+```ruby
+gem 'alertdesigner'
 ```
 
 ## FAQ
