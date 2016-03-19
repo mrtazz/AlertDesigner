@@ -1,8 +1,8 @@
-require 'alertdesigner/formatters'
-require 'alertdesigner/check'
+require "alertdesigner/formatters"
+require "alertdesigner/check"
 
+# Top level AlertDesigner module with static methods for the DSL
 module AlertDesigner
-
   @checks = []
   @formatters = []
 
@@ -37,5 +37,4 @@ module AlertDesigner
     end
     ret
   end
-
 end

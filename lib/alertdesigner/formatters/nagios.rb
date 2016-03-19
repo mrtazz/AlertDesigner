@@ -1,15 +1,15 @@
-require 'alertdesigner/formatters'
+require "alertdesigner/formatters"
 
-require 'erb'
-require 'ostruct'
+require "erb"
+require "ostruct"
 
 module AlertDesigner
   module Formatters
+    # Class for the generic nagios formatter
     class Nagios < Formatter
-
+      # Generic Nagios definition class
       class NagiosDefinition < OpenStruct
-
-        TEMPLATE = <<-EOS
+        TEMPLATE = <<-EOS.freeze
 define <%= type %>{
 <% properties.each do |key, value| %>
     <%= key %>    <%= value %>
@@ -19,9 +19,18 @@ define <%= type %>{
         EOS
 
         def render
-          ERB.new(TEMPLATE, 0, '<>').result(binding)
+          ERB.new(TEMPLATE, 0, "<>").result(binding)
         end
 
+        def self.get_service(check, check_template)
+          fmt_check = NagiosDefinition.new
+          fmt_check.type = "service"
+          fmt_check.properties = check.attributes
+          fmt_check.properties["use"] = check_template
+          fmt_check.properties["service_description"] = check.description
+          fmt_check.properties["check_command"] = check.command
+          fmt_check
+        end
       end
 
       def check_template(template)
@@ -30,10 +39,9 @@ define <%= type %>{
 
       def format(type, value)
         return format_checks(value) if type == :checks
-        return nil
       end
 
-	private
+      private
 
       def format_checks(checks)
         ret = ""
@@ -41,39 +49,35 @@ define <%= type %>{
           # split up host groups with default and explicitly specified contact
           # definitions
           hgroups, hgroups_with_contacts = check.hostgroups.partition do |grp|
-            grp.kind_of?(String)
+            grp.is_a?(String)
           end
 
           # create service definition for default contacts
-          fmt_check = NagiosDefinition.new
-          fmt_check.type = "service"
-          fmt_check.properties = check.attributes
-          fmt_check.properties["use"] = @check_template
-          fmt_check.properties["service_description"] = check.description
-          fmt_check.properties["check_command"] = check.command
+          fmt_check = NagiosDefinition.get_service(check, @check_template)
           fmt_check.properties["hostgroup_name"] = hgroups.join(",")
           ret << fmt_check.render
 
-          # create service definition for specified contacts
-          hgroups_with_contacts.each do |entry|
-            entry.each do |group, contact|
-              fmt_check = NagiosDefinition.new
-              fmt_check.type = "service"
-              fmt_check.properties = check.attributes
-              fmt_check.properties["use"] = @check_template
-              fmt_check.properties["service_description"] = check.description
-              fmt_check.properties["check_command"] = check.command
-              fmt_check.properties["hostgroup_name"] = group
-              fmt_check.properties["contact_groups"] = contact
-              ret << fmt_check.render
-            end
-          end
-
+          ret << checks_for_hostgroups_with_contacts(check,
+                                                     hgroups_with_contacts)
         end
 
         ret
       end
 
+      def checks_for_hostgroups_with_contacts(check, hgroups)
+        ret = ""
+        # create service definition for specified contacts
+        hgroups.each do |entry|
+          entry.each do |group, contact|
+            fmt_check = NagiosDefinition.get_service(check, @check_template)
+            fmt_check.properties["hostgroup_name"] = group
+            fmt_check.properties["contact_groups"] = contact
+            ret << fmt_check.render
+          end
+        end
+
+        ret
+      end
     end
   end
 end
