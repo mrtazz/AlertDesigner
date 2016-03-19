@@ -2,6 +2,7 @@
 
 [![Build Status](https://travis-ci.org/mrtazz/AlertDesigner.svg?branch=master)](https://travis-ci.org/mrtazz/AlertDesigner)
 [![Coverage Status](https://coveralls.io/repos/mrtazz/AlertDesigner/badge.svg?branch=master&service=github)](https://coveralls.io/github/mrtazz/AlertDesigner?branch=master)
+[![Code Climate](https://codeclimate.com/github/mrtazz/AlertDesigner/badges/gpa.svg)](https://codeclimate.com/github/mrtazz/AlertDesigner)
 [![MIT license](https://img.shields.io/badge/license-MIT-blue.svg)](http://opensource.org/licenses/MIT)
 
 ## Overview
