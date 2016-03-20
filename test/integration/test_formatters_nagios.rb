@@ -10,9 +10,10 @@ class FormatterNagiosTest < Test::Unit::TestCase
   end
 
   def teardown
+    AlertDesigner.reset
   end
 
-  def test_nagios_formatter_integration
+  def test_nagios_formatter_services
 
     AlertDesigner.define do
 
@@ -93,6 +94,44 @@ define service{
     check_command    check_nrpe!check_httpd
     hostgroup_name    ApiServers
     contact_groups    api-team
+}
+
+EOS
+
+    assert_equal(expected, ret)
+  end
+
+  def test_nagios_formatter_commands
+
+    AlertDesigner.define do
+
+      # let's use the Nagios formatter
+      formatter AlertDesigner::Formatters::Nagios
+
+      # define some basic commands
+      {
+        "check_nrpe"       => "$USER1$/check_nrpe2 -H $HOSTADDRESS$ -c $ARG1$ -t 30",
+        "check_local_disk" => "$USER1$/check_disk -w $ARG1$ -c $ARG2$ -p $ARG3$",
+      }.each do |name, check_cmd|
+
+        command name do
+          command check_cmd
+        end
+
+      end
+    end
+
+    ret = AlertDesigner.format
+
+    expected = <<-EOS
+define command{
+    command_name    check_nrpe
+    command_line    $USER1$/check_nrpe2 -H $HOSTADDRESS$ -c $ARG1$ -t 30
+}
+
+define command{
+    command_name    check_local_disk
+    command_line    $USER1$/check_disk -w $ARG1$ -c $ARG2$ -p $ARG3$
 }
 
 EOS

@@ -21,6 +21,16 @@ AlertDesigner.define do
     check_template "generic-service"
   end
 
+  {
+    "check_nrpe"       => "$USER1$/check_nrpe2 -H $HOSTADDRESS$ -c $ARG1$ -t 30",
+    "check_local_disk" => "$USER1$/check_disk -w $ARG1$ -c $ARG2$ -p $ARG3$",
+  }.each do |name, check_cmd|
+
+    command name do
+      command check_cmd
+    end
+  end
+
   # a simple disk space check
   check "/ Partition Disk Space" do
     hostgroups ["freebsd-base"]

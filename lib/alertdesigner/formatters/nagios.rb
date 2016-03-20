@@ -31,6 +31,15 @@ define <%= type %>{
           fmt_check.properties["check_command"] = check.command
           fmt_check
         end
+
+        def self.get_command(name, cmd)
+          fmt_command = NagiosDefinition.new
+          fmt_command.type = "command"
+          fmt_command.properties = {}
+          fmt_command.properties["command_name"] = name
+          fmt_command.properties["command_line"] = cmd
+          fmt_command
+        end
       end
 
       def check_template(template)
@@ -39,9 +48,23 @@ define <%= type %>{
 
       def format(type, value)
         return format_checks(value) if type == :checks
+        return format_commands(value) if type == :commands
       end
 
       private
+
+      def format_commands(commands)
+        ret = ""
+
+        commands ||= []
+
+        commands.each do |cmd|
+          command = NagiosDefinition.get_command(cmd.name, cmd.command)
+          ret << command.render
+        end
+
+        ret
+      end
 
       def format_checks(checks)
         ret = ""
