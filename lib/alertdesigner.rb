@@ -9,18 +9,6 @@ module AlertDesigner
   @formatters = []
   @commands = []
 
-  def self.checks
-    @checks
-  end
-
-  def self.formatters
-    @formatters
-  end
-
-  def self.commands
-    @commands
-  end
-
   def self.define(&block)
     instance_eval(&block)
   end
