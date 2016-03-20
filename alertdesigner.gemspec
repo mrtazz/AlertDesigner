@@ -1,5 +1,4 @@
 $LOAD_PATH.push File.expand_path("../lib", __FILE__)
-require "alertdesigner"
 require "English"
 
 Gem::Specification.new do |gem|

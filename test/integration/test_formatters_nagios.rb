@@ -1,4 +1,12 @@
-require File.expand_path('../../test_helper', __FILE__)
+if ENV["COVERAGE"]
+  require "coveralls"
+  require "simplecov"
+  SimpleCov.start do
+    add_filter "/test/"
+    command_name "Integration Tests"
+  end
+end
+
 
 require 'test/unit'
 require 'alertdesigner'

@@ -1,4 +1,5 @@
 require "alertdesigner/formatters"
+require "alertdesigner/formatters/nagios"
 require "alertdesigner/check"
 require "alertdesigner/command"
 
