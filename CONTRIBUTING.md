@@ -8,4 +8,4 @@
 - Send me a pull request. Bonus points for topic branches.
 
 ## How to run tests
-- bundle install && bundle exec rake
+- bundle install && bundle exec rake ci
