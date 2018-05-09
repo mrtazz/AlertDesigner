@@ -11,6 +11,9 @@ AlertDesigner is a Ruby DSL to create Nagios checks. It attempts to take some
 of the repetitive work of creating Nagios alerts away. It's supposed to
 complement your existing setup and not necessarily replace it.
 
+This project is no longer actively maintained as I'm not using Nagios anymore. If you have a use case for
+it and are interested in maintaining, let me know [on Twitter](https://twitter.com/mrtazz).
+
 ## Example
 
 ```ruby
